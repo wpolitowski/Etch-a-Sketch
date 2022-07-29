@@ -11,10 +11,12 @@ function generateGrid(size) {
         div.classList.add('cell');
         div.style.width = `${cellSize}px`;
         div.style.height = `${cellSize}px`;
+        div.intensity = 0; // used for gradual mode
         container.appendChild(div);
     }
     
     cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => cell.addEventListener('mousedown', changeColor));
     cells.forEach(cell => cell.addEventListener('mousedown', startSketching));
 }
 
@@ -23,18 +25,24 @@ function deleteGrid() {
 }
 
 
-//CHANGING COLORS
+//START SKETCHING
+
+const colorPicker = document.getElementById('color-picker');
 
 function startSketching() {
-    this.style.backgroundColor = '#ccc'; //change color of a clicked (initial) cell
-    cells.forEach(cell => cell.addEventListener('mouseover', changeColor));
+    // changeColor(); doesnt work - solved by adding second event listener while generating grid
+    //this.style.backgroundColor = colorPicker.value; //change color of a clicked (initial) cell - works
+    cells.forEach(cell => cell.addEventListener('mouseover', changeColor))  ;
     cells.forEach(cell => cell.addEventListener('mouseup', () => {
         cells.forEach(cell => cell.removeEventListener('mouseover', changeColor));
     }));     
 }
 
 function changeColor() {
-    this.style.backgroundColor = '#ccc'
+    if (gradualBtn.classList.contains('activated')) {
+        if (this.intensity < 15) this.intensity++;
+        this.style.backgroundColor =  `${colorPicker.value}${intensityArr[this.intensity]}`;
+    } else this.style.backgroundColor = colorPicker.value;
 }
 
 //button for generating a new grid of selected density
@@ -51,7 +59,7 @@ function changeColor() {
 //     generateGrid(size);
 // }
 
-
+//CHANGING GRID SIZE
 const sizeSlider = document.getElementById('size-slider');
 const sizeLabel = document.querySelector('label[for="size-slider"]');
 
@@ -66,6 +74,20 @@ sizeSlider.addEventListener('change', () => { //'change' only fires when final v
     generateGrid(sizeSlider.value);
     showGridSize();
 });
+
+//GRADUAL MODE
+const gradualBtn = document.querySelector('.gradual-mode');
+const intensityArr = ['00','11','22','33','44','55','66','77','88','99','aa','bb','cc','dd','ee','ff'];
+
+gradualBtn.onclick = () => {
+    gradualBtn.classList.toggle('activated');
+};
+
+colorPicker.onchange = () => {
+    cells.forEach(cell => cell.intensity = 0);
+}
+
+
 
 
 
