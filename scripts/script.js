@@ -39,10 +39,17 @@ function startSketching() {
 }
 
 function changeColor() {
-    if (gradualBtn.classList.contains('activated')) {
-        if (this.intensity < 15) this.intensity++;
-        this.style.backgroundColor =  `${colorPicker.value}${intensityArr[this.intensity]}`;
-    } else this.style.backgroundColor = colorPicker.value;
+    if (eraserBtn.classList.contains('activated')) {
+        this.style.backgroundColor = '';
+        this.intensity = 0;
+    } else {
+        if (gradualBtn.classList.contains('activated')) {
+            if (this.intensity < 15) this.intensity++;
+            this.style.backgroundColor =  `${colorPicker.value}${intensityArr[this.intensity]}`;
+        } else this.style.backgroundColor = colorPicker.value;
+    }
+
+
 }
 
 //button for generating a new grid of selected density
@@ -87,8 +94,11 @@ colorPicker.onchange = () => {
     cells.forEach(cell => cell.intensity = 0);
 }
 
-
-
+//ERASER
+const eraserBtn = document.querySelector('.eraser');
+eraserBtn.addEventListener('click', () => {
+    eraserBtn.classList.toggle('activated');
+});
 
 
 generateGrid(16); //initial grid
