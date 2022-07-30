@@ -16,8 +16,8 @@ function generateGrid(size) {
     }
     
     cells = document.querySelectorAll('.cell');
-    cells.forEach(cell => cell.addEventListener('mousedown', changeColor));
-    cells.forEach(cell => cell.addEventListener('mousedown', startSketching));
+    cells.forEach(cell => cell.addEventListener('mousedown', changeColor)); //changes color for currently clicked cell
+    cells.forEach(cell => cell.addEventListener('mousedown', startSketching));//start event for hovering with mouse pressed down
 }
 
 function deleteGrid() {
@@ -46,6 +46,12 @@ function changeColor() {
         if (gradualBtn.classList.contains('activated')) {
             if (this.intensity < 15) this.intensity++;
             this.style.backgroundColor =  `${colorPicker.value}${intensityArr[this.intensity]}`;
+        } else if (rainbowBtn.classList.contains('activated')) {
+            const r = Math.round(Math.random() * 255);
+            const g = Math.round(Math.random() * 255);
+            const b = Math.round(Math.random() * 255);
+            this.style.backgroundColor = `rgb(${r},${g},${b})`;
+            console.log(`rgb(${r},${g},${b})`)     
         } else this.style.backgroundColor = colorPicker.value;
     }
 
@@ -94,11 +100,27 @@ colorPicker.onchange = () => {
     cells.forEach(cell => cell.intensity = 0);
 }
 
+//RAINBOW MODE
+const rainbowBtn = document.querySelector('.rainbow-mode');
+rainbowBtn.addEventListener('click', () => {
+    rainbowBtn.classList.toggle('activated');
+});
+
+
+
 //ERASER
 const eraserBtn = document.querySelector('.eraser');
 eraserBtn.addEventListener('click', () => {
     eraserBtn.classList.toggle('activated');
 });
+
+//CLEAR GRID
+const clearGridBtn = document.querySelector('.clear-grid');
+clearGridBtn.onclick = () => {
+    cells.forEach(cell => cell.style.backgroundColor = '');
+};
+
+
 
 
 generateGrid(16); //initial grid
