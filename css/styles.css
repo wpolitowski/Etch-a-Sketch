@@ -1,9 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Mouse Memoirs', sans-serif;
+    f/ont-weight: 400;
+    font-size: 20px;
+    color: #123456;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: antiquewhite;   
+    
+}
+
+h1 {
+    padding: 20px;
+    font-size: 48px;
+}
+
+.container, .tools-container {
+    width: 600px;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
-    width: 600px;
-    border: 4px solid gainsboro;
-    
+    border: 2px solid gainsboro;
+    box-shadow: 0 0 8px 2px gainsboro;
 }
 
 .cell {
@@ -23,14 +51,90 @@
     -ms-user-select: none;    
 }
 
-.activated {
+.tools-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.drawing-tools, .other-tools {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
 }
 
-/* .square:hover {
-    background-color: lightblue;
-} */
+.color-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-/* .square:active {
-    background-color: lightsalmon;
-} */
+.color-container > label {
+    margin: auto;
+    cursor: pointer;
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 40px;
+	height: 40px;
+    cursor: pointer;
+    
+} input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+} input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+
+.size-slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+input[type="range"] {
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    background: gainsboro;
+
+    width: 100%;
+    height: 17px;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background: #123456;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background 1.3s ease-in-out;
+}
+
+button {
+    width: 130px;
+    height: 40px;
+    padding: 8px;
+    color: #fff;
+    background-color: #123456;
+    border: none;
+}
+
+button:hover, input:hover {
+    box-shadow: 0 0 6px 1px #aaa;
+}
+
+.activated {
+
+}
+
+.deactivated {
+    pointer-events: none;
+    opacity: 0.5;
+}

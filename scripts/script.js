@@ -22,12 +22,14 @@ function generateGrid(size) {
 
 function deleteGrid() {
     cells.forEach(cell => cell.remove());
+    if (eraserBtn.classList.contains('activated')) toggleEraser();
 }
 
 
 //START SKETCHING
 
 const colorPicker = document.getElementById('color-picker');
+const colorPickerLabel = document.querySelector('label[for="color-picker"');
 
 function startSketching() {
     // changeColor(); doesnt work - solved by adding second event listener while generating grid
@@ -50,27 +52,12 @@ function changeColor() {
             const r = Math.round(Math.random() * 255);
             const g = Math.round(Math.random() * 255);
             const b = Math.round(Math.random() * 255);
-            this.style.backgroundColor = `rgb(${r},${g},${b})`;
-            console.log(`rgb(${r},${g},${b})`)     
+            this.style.backgroundColor = `rgb(${r},${g},${b})`;  
         } else this.style.backgroundColor = colorPicker.value;
     }
 
 
 }
-
-//button for generating a new grid of selected density
-
-// const gridSizeBtn = document.querySelector('.grid-size');
-// gridSizeBtn.onclick = function() {
-//     let size = 0;
-//     while (size < 1 || size > 100) {
-//         size = prompt("Please enter grid size between 1 and 100");
-//         if (size === null) break;
-//     }
-
-//     deleteGrid();
-//     generateGrid(size);
-// }
 
 //CHANGING GRID SIZE
 const sizeSlider = document.getElementById('size-slider');
@@ -94,6 +81,7 @@ const intensityArr = ['00','11','22','33','44','55','66','77','88','99','aa','bb
 
 gradualBtn.onclick = () => {
     gradualBtn.classList.toggle('activated');
+    rainbowBtn.classList.remove('activated');
 };
 
 colorPicker.onchange = () => {
@@ -104,23 +92,28 @@ colorPicker.onchange = () => {
 const rainbowBtn = document.querySelector('.rainbow-mode');
 rainbowBtn.addEventListener('click', () => {
     rainbowBtn.classList.toggle('activated');
+    gradualBtn.classList.remove('activated');
 });
-
-
 
 //ERASER
 const eraserBtn = document.querySelector('.eraser');
-eraserBtn.addEventListener('click', () => {
+eraserBtn.addEventListener('click', toggleEraser);
+
+function toggleEraser() {
     eraserBtn.classList.toggle('activated');
-});
+    rainbowBtn.classList.toggle('deactivated');
+    gradualBtn.classList.toggle('deactivated');
+    colorPicker.classList.toggle('deactivated');
+    colorPickerLabel.classList.toggle('deactivated');
+}
 
 //CLEAR GRID
 const clearGridBtn = document.querySelector('.clear-grid');
 clearGridBtn.onclick = () => {
     cells.forEach(cell => cell.style.backgroundColor = '');
+    if (eraserBtn.classList.contains('activated')) toggleEraser();
+    //this makes sure that user can draw right after clearing the grid if eraser was activated just before
 };
-
-
 
 
 generateGrid(16); //initial grid

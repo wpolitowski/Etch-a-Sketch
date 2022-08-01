@@ -8,23 +8,30 @@
     </head>
     <body>
         <h1>Etch-a-Sketch</h1>
-        <div class="container"></div>
+        <div class="container"></div>              
 
-        <!-- <button class="grid-size">Grid size</button> -->
-        <input type="range" min="4" max="64" value="16" class="slider" name="size-slider" id="size-slider">
-        <label for="size-slider">Grid size</label>
-
-        &nbsp&nbsp&nbsp&nbsp <!-- delete it later -->
-
-        <input type="color" value="#123456" name="color-picker" id="color-picker" class="color-picker">
-        <label for="color-picker">Pen color</label>
-
-        &nbsp&nbsp&nbsp&nbsp <!-- delete it later -->
-
-        <button class="gradual-mode">Gradual mode</button>
-        <button class="rainbow-mode">Rainbow mode</button>
-        <button class="eraser">Toggle eraser</button>
-        <button class="clear-grid">Clear grid</button>
-
+        <div class="tools-container">
+            <div class="drawing-tools">
+                <div class="color-container">
+                    
+                    <input type="color" value="#123456" name="color-picker" id="color-picker" class="color-picker">
+                    <label for="color-picker">Pen color</label>
+                    
+                </div>
+        
+                <button class="gradual-mode">Gradual mode</button>
+                <button class="rainbow-mode">Rainbow mode</button>
+            </div>    
+            
+            <div class="other-tools">
+                <button class="eraser">Toggle eraser</button>
+                <button class="clear-grid">Clear grid</button>
+                
+                <div class="size-slider">
+                    <input type="range" min="4" max="64" value="16" class="slider" name="size-slider" id="size-slider">
+                    <label for="size-slider">Grid size</label>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
