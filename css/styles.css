@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Mouse Memoirs', sans-serif;
-    f/ont-weight: 400;
+    font-weight: 400;
     font-size: 20px;
     color: #123456;
 }
@@ -15,7 +15,6 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: antiquewhite;   
-    
 }
 
 h1 {
@@ -34,16 +33,11 @@ h1 {
     box-shadow: 0 0 8px 2px gainsboro;
 }
 
-.cell {
-    box-sizing: border-box;
-    height: 37.5px;
-    width: 37.5px;
-    /*border: 1px solid black;*/
+.cell { 
     flex: 0 0 auto;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
 
     /* properties below disable dragging that allows drawing without the mouse pressed (hovering) */
-    user-drag: none;
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;
@@ -62,7 +56,6 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
 }
 
 .color-container {
@@ -88,7 +81,6 @@ input[type="color"] {
 } input[type="color"]::-webkit-color-swatch {
 	border: none;
 }
-
 
 .size-slider {
     display: flex;
@@ -128,10 +120,6 @@ button {
 
 button:hover, input:hover {
     box-shadow: 0 0 6px 1px #aaa;
-}
-
-.activated {
-
 }
 
 .deactivated {

@@ -3,8 +3,11 @@ const container = document.querySelector('.container');
 let cells;
 
 function generateGrid(size) {
-    const gridWidth = getComputedStyle(container).width.slice(0,-2);
+    const gridWidth = 600;
     const cellSize = gridWidth / size;
+
+    //this allow to compensate for firefox decimal rounding mechanism
+    container.style.width = `${gridWidth + 0.55}px`
     
     for (let i = 0; i < size * size; i++) {
         const div = document.createElement('div');
@@ -55,8 +58,6 @@ function changeColor() {
             this.style.backgroundColor = `rgb(${r},${g},${b})`;  
         } else this.style.backgroundColor = colorPicker.value;
     }
-
-
 }
 
 //CHANGING GRID SIZE
