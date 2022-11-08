@@ -120,9 +120,18 @@ button {
 
 button:hover, input:hover {
     box-shadow: 0 0 6px 1px #aaa;
+    cursor: pointer;
 }
 
 .deactivated {
     pointer-events: none;
     opacity: 0.5;
+}
+
+.activated {
+    background-color: #c74118;
+}
+
+.clear-grid:active {
+    background-color: #c74118;
 }
